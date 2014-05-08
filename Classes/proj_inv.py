@@ -21,22 +21,24 @@ class Inventory():
 	def __init__(self):
 		self.product_count = 0
 		self.products = []
+		self.total_val = 0.00
 
 	def add(self, object):
-		if object.id in self.products:
-			self.products.remove(object)
 		self.products.append(object)
 
 	def delete(self, object):
 		self.products.remove(object)
 	
 	def list(self):
-		print "\nList of Products: (name, quantity, price)"
+		print "\nList of Products: (id, name, quantity, price)"
 		print "------------------------------------------"
 		for product in self.products:
 			print "|%s, %s, %s, %s|" % (product.id, product.name, product.quant, product.value)
 		print "------------------------------------------"
-
+		for product in self.products:
+			self.total_val += product.value
+		print "Total value of all products is: $%s\n" % (self.total_val)
+		self.total_val = 0.00
 
 	
 if __name__ == "__main__":
@@ -53,4 +55,5 @@ if __name__ == "__main__":
 	inv.list()
 
 	one.edit(new_quant = 2345678)
+	two.edit(new_value = 230000000.67)
 	inv.list()
